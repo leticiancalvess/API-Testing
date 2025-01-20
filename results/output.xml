@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.8.0 on win32)" generated="2025-01-20T20:17:16.754200" rpa="false" schemaversion="5">
+<suite id="s1" name="API Testing" source="C:\Users\letic\Documents\Robot Udemy\API Testing">
+<suite id="s1-s1" name="Tests" source="C:\Users\letic\Documents\Robot Udemy\API Testing\tests">
+<suite id="s1-s1-s1" name="Api Testing Users" source="C:\Users\letic\Documents\Robot Udemy\API Testing\tests\api_testing_users.robot">
+<test id="s1-s1-s1-t1" name="Scenario 1: Register a new user (ServeRest)" line="7">
+<kw name="Create a new user" owner="api_testing_users">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-01-20T20:17:16.875577" level="INFO">${random_word} = aYhq</msg>
+<var>${random_word}</var>
+<arg>length=4</arg>
+<arg>chars=[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.875577" elapsed="0.000000"/>
+</kw>
+<kw name="Convert To Lower Case" owner="String">
+<msg time="2025-01-20T20:17:16.877088" level="INFO">${random_word} = ayhq</msg>
+<var>${random_word}</var>
+<arg>${random_word}</arg>
+<doc>Converts string to lower case.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.877088" elapsed="0.000000"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-01-20T20:17:16.878114" level="INFO">${email_test} = ayhq@emailtest.com</msg>
+<arg>${email_test}</arg>
+<arg>${random_word}@emailtest.com</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.878114" elapsed="0.001102"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-20T20:17:16.879216" level="INFO">ayhq@emailtest.com</msg>
+<arg>${email_test}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.879216" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-01-20T20:17:16.875577" elapsed="0.004639"/>
+</kw>
+<kw name="Register the user on the ServeRest" owner="api_testing_users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-20T20:17:16.881216" level="INFO">${body} = {'nome': '"Test Testt"', 'email': 'ayhq@emailtest.com', 'password': '1234', 'administrador': 'true'}</msg>
+<var>${body}</var>
+<arg>nome="Test Testt"</arg>
+<arg>email=${email_test}</arg>
+<arg>password=1234</arg>
+<arg>administrador=true</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.880216" elapsed="0.001000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-20T20:17:16.881216" level="INFO">{'nome': '"Test Testt"', 'email': 'ayhq@emailtest.com', 'password': '1234', 'administrador': 'true'}</msg>
+<arg>${body}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.881216" elapsed="0.000000"/>
+</kw>
+<kw name=" Create the session on the ServeRest" owner="api_testing_users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-20T20:17:16.883217" level="INFO">${headers} = {'accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.883217" elapsed="0.000000"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-20T20:17:16.884216" level="INFO">Creating Session using : alias=ServeRest, url=https://serverest.dev/, headers={'accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>alias=ServeRest</arg>
+<arg>url=https://serverest.dev/</arg>
+<arg>headers=${headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-20T20:17:16.884216" elapsed="0.001000"/>
+</kw>
+<status status="PASS" start="2025-01-20T20:17:16.882216" elapsed="0.003000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-01-20T20:17:17.220278" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '102'} 
+ body=b'{"nome": "\\"Test Testt\\"", "email": "ayhq@emailtest.com", "password": "1234", "administrador": "true"}' 
+ </msg>
+<msg time="2025-01-20T20:17:17.220278" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=201, reason=Created 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'X-Cloud-Trace-Context': '5fd3fbfc377d20a0954a8ce0b96c8988', 'Date': 'Mon, 20 Jan 2025 23:17:17 GMT', 'Server': 'Google Frontend', 'Content-Length': '82'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "hOoxoq7IkqZD24L4"
+} 
+ </msg>
+<msg time="2025-01-20T20:17:17.220278" level="INFO">C:\Users\letic\AppData\Roaming\Python\Python38\site-packages\urllib3\connectionpool.py:1099: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-01-20T20:17:17.221278" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>alias=ServeRest</arg>
+<arg>url=/usuarios</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-01-20T20:17:16.886217" elapsed="0.335061"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-01-20T20:17:17.222276" level="INFO">{'message': 'Cadastro realizado com sucesso', '_id': 'hOoxoq7IkqZD24L4'}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-01-20T20:17:17.222276" elapsed="0.001001"/>
+</kw>
+<status status="PASS" start="2025-01-20T20:17:16.880216" elapsed="0.343061"/>
+</kw>
+<kw name=" Create the session on the ServeRest" owner="api_testing_users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-01-20T20:17:17.224301" level="INFO">${headers} = {'accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-01-20T20:17:17.224301" elapsed="0.000000"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-01-20T20:17:17.225278" level="INFO">Creating Session using : alias=ServeRest, url=https://serverest.dev/, headers={'accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>alias=ServeRest</arg>
+<arg>url=https://serverest.dev/</arg>
+<arg>headers=${headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-01-20T20:17:17.225278" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-01-20T20:17:17.223277" elapsed="0.002001"/>
+</kw>
+<status status="PASS" start="2025-01-20T20:17:16.873586" elapsed="0.351692"/>
+</test>
+<status status="PASS" start="2025-01-20T20:17:16.782143" elapsed="0.445657"/>
+</suite>
+<status status="PASS" start="2025-01-20T20:17:16.778144" elapsed="0.450657"/>
+</suite>
+<status status="PASS" start="2025-01-20T20:17:16.757012" elapsed="0.473208"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="API Testing">API Testing</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Tests">API Testing.Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="Api Testing Users">API Testing.Tests.Api Testing Users</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
