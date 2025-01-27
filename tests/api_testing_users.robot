@@ -15,3 +15,9 @@ Scenario 2: Try to register an existing user
     Register the user on the ServeRest    ${email_test}    status_code=201 
     Repeate the creation of the user with the same e-mail 
     Confirm if the API fails
+
+Scenario 3: Search for the a new user
+    Create a new user
+    Register the user on the ServeRest    ${email_test}    status_code=201
+    Search for the user's record
+    Confirm the record

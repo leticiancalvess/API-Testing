@@ -24,9 +24,10 @@ Register the user on the ServeRest
     ...    alias=ServeRest
     ...    url=/usuarios
     ...    json=${body}
-    ...    expected_status=${status_code}
+    ...    expected_status=${status_code}    
     
     Log    ${response.json()}
+    Set Test Variable    ${id_user}    ${response.json()["_id"]}
     Set Test Variable    ${responsejson}    ${response.json()}
 
  Create the session on the ServeRest
@@ -44,3 +45,15 @@ Repeate the creation of the user with the same e-mail
 
 Confirm if the API fails
     Dictionary Should Contain Item    ${responsejson}    message    Este email já está sendo usado
+
+Search for the user's record
+    ${search_response}    GET On Session    alias=ServeRest    url=/usuarios/${id_user}    expected_status=200
+    Set Test Variable    ${response_query}    ${search_response.json()}
+
+Confirm the record
+    Log     ${response_query}
+    Dictionary Should Contain Item    ${response_query}    nome    \"Test Testt\"    
+    Dictionary Should Contain Item    ${response_query}    email    ${email_test} 
+    Dictionary Should Contain Item    ${response_query}    password    1234 
+    Dictionary Should Contain Item    ${response_query}    administrador    true 
+    Dictionary Should Contain Item    ${response_query}    _id    ${id_user} 
