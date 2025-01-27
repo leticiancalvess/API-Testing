@@ -11,9 +11,10 @@ Create a new user
     Log    ${email_test}
 
 Register the user on the ServeRest
+    [Arguments]    ${email}    ${status_code}
     ${body}    Create Dictionary    
     ...    nome="Test Testt"    
-    ...    email=${email_test}    
+    ...    email=${email}   
     ...    password=1234    
     ...    administrador=true
 
@@ -23,6 +24,7 @@ Register the user on the ServeRest
     ...    alias=ServeRest
     ...    url=/usuarios
     ...    json=${body}
+    ...    expected_status=${status_code}
     
     Log    ${response.json()}
     Set Test Variable    ${responsejson}    ${response.json()}
@@ -36,3 +38,9 @@ Confirm if the user was created successfully
     Log     ${responsejson}
     Dictionary Should Contain Item    ${responsejson}    message    Cadastro realizado com sucesso
     Dictionary Should Contain Key    ${responsejson}    _id
+
+Repeate the creation of the user with the same e-mail
+    Register the user on the ServeRest    email=${email_test}    status_code=400
+
+Confirm if the API fails
+    Dictionary Should Contain Item    ${responsejson}    message    Este email já está sendo usado
