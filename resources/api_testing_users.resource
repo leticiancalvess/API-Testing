@@ -27,7 +27,11 @@ Register the user on the ServeRest
     ...    expected_status=${status_code}    
     
     Log    ${response.json()}
-    Set Test Variable    ${id_user}    ${response.json()["_id"]}
+    IF    ${response.status_code} == 201
+        Set Test Variable    ${id_user}    ${response.json()["_id"]}
+    END
+        
+    
     Set Test Variable    ${responsejson}    ${response.json()}
 
  Create the session on the ServeRest
